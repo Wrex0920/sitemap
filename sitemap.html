@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Site Map - Beautiful Spots in the Philippines</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --neon-teal: #00f3ff;
+            --neon-teal-dim: rgba(0, 243, 255, 0.2);
+            --dark-bg: #070b14;
+            --card-bg: #111827;
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--dark-bg);
+            background-image: radial-gradient(circle at center, #112233 0%, #070b14 100%);
+            color: var(--text-main);
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            color: var(--neon-teal);
+            text-shadow: 0 0 10px var(--neon-teal-dim), 0 0 20px var(--neon-teal-dim);
+            letter-spacing: 1px;
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: 1rem;
+            margin-top: 5px;
+        }
+
+        .sitemap-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .node {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 16px 24px;
+            width: 100%;
+            max-width: 350px;
+            text-align: center;
+            border: 1px solid var(--neon-teal);
+            box-shadow: 0 0 10px var(--neon-teal-dim);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .node:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 20px var(--neon-teal);
+        }
+
+        .node-root {
+            background: rgba(0, 243, 255, 0.1);
+            color: var(--neon-teal);
+            font-size: 1.25rem;
+            font-weight: 700;
+            text-shadow: 0 0 8px var(--neon-teal-dim);
+        }
+
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 15px;
+        }
+
+        .nav-pill {
+            text-decoration: none;
+            color: var(--neon-teal);
+            border: 1px solid var(--neon-teal);
+            background: transparent;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .nav-pill:hover, .nav-pill:active {
+            background: var(--neon-teal);
+            color: var(--dark-bg);
+            box-shadow: 0 0 15px var(--neon-teal);
+            transform: scale(1.05);
+        }
+
+        .connector-line {
+            width: 2px;
+            height: 30px;
+            background-color: var(--neon-teal);
+            box-shadow: 0 0 8px var(--neon-teal);
+        }
+
+        .articles-wrapper {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .article-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(0, 243, 255, 0.3);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .article-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--neon-teal);
+            box-shadow: 0 8px 25px var(--neon-teal-dim);
+        }
+
+        .card-media-container video {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-bottom: 1px solid rgba(0, 243, 255, 0.2);
+            background-color: #000;
+        }
+
+        .card-body {
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--neon-teal);
+            margin-bottom: 4px;
+            text-shadow: 0 0 5px rgba(0, 243, 255, 0.3);
+        }
+
+        .card-caption {
+            font-size: 0.8rem;
+            color: #fff;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .card-desc {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+            margin-bottom: 15px;
+        }
+
+        .audio-player {
+            width: 100%;
+            height: 35px;
+            margin-bottom: 15px;
+            border-radius: 20px;
+        }
+
+        .card-btn {
+            margin-top: auto;
+            text-decoration: none;
+            color: var(--dark-bg);
+            background-color: var(--neon-teal);
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 10px rgba(0, 243, 255, 0.4);
+            cursor: pointer;
+        }
+
+        .card-btn:hover, .card-btn:active {
+            background-color: #fff;
+            color: var(--dark-bg);
+            box-shadow: 0 0 20px var(--neon-teal);
+            transform: scale(1.03);
+        }
+
+        .node-footer {
+            background: #0b1120;
+            color: var(--text-muted);
+        }
+
+        @media (max-width: 768px) {
+            .articles-grid {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Interactive Site Map</h1>
+        <p>Explore the structure & destinations of Beautiful Spots in the Philippines</p>
+    </header>
+
+    <div class="sitemap-container">
+
+        <div class="node node-root">
+            <i class="fa-solid fa-map"></i> Beautiful Spots in the Philippines
+        </div>
+
+        <div class="connector-line"></div>
+
+        <div class="node">
+            <strong style="color: var(--neon-teal);">Header Node</strong><br>
+            <small class="text-muted">Title + Tagline Section</small>
+        </div>
+
+        <div class="connector-line"></div>
+
+        <div class="node">
+            <strong style="color: var(--neon-teal);">Navigation Bar</strong>
+            <div class="nav-links">
+                <a href="#intro" class="nav-pill">Intro</a>
+                <a href="#boracay" class="nav-pill">Boracay</a>
+                <a href="#underground-river" class="nav-pill">Palawan</a>
+                <a href="#chocolate-hills" class="nav-pill">Bohol</a>
+                <a href="#mayon" class="nav-pill">Mayon</a>
+                <a href="#siargao" class="nav-pill">Siargao</a>
+            </div>
+        </div>
+
+        <div class="connector-line"></div>
+
+        <div class="node">
+            <i class="fa-solid fa-layer-group" style="color: var(--neon-teal);"></i> Main Content Area
+        </div>
+
+        <div class="connector-line"></div>
+
+        <div class="node" id="intro">
+            <strong style="color: var(--neon-teal);">Introduction</strong><br>
+            <small class="text-muted">Overview of the Philippine Archipelago</small>
+        </div>
+
+        <div class="connector-line"></div>
+
+        <div class="articles-wrapper">
+            <div class="articles-grid">
+
+                <div class="article-card" id="boracay">
+                    <div class="card-media-container">
+                        <video controls poster="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80">
+                            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                            Your browser does not support HTML video.
+                        </video>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-title">Boracay</div>
+                        <div class="card-caption">White Beach</div>
+                        <div class="card-desc">Soft sand, turquoise waters, and vibrant island nightlife.</div>
+                        <audio controls class="audio-player">
+                            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+                        </audio>
+                        <a href="https://en.wikipedia.org/wiki/Boracay" target="_blank" rel="noopener noreferrer" class="card-btn">Visit Website <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                    </div>
+                </div>
+
+                <div class="article-card" id="underground-river">
+                    <div class="card-media-container">
+                        <video controls poster="https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?auto=format&fit=crop&w=600&q=80">
+                            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-title">Underground River</div>
+                        <div class="card-caption">Palawan Cave</div>
+                        <div class="card-desc">Subterranean river system surrounded by limestone karst.</div>
+                        <audio controls class="audio-player">
+                            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mpeg">
+                        </audio>
+                        <a href="https://en.wikipedia.org/wiki/Puerto_Princesa_Subterranean_River_National_Park" target="_blank" rel="noopener noreferrer" class="card-btn">Visit Website <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                    </div>
+                </div>
+
+                <div class="article-card" id="chocolate-hills">
+                    <div class="card-media-container">
+                        <video controls poster="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=600&q=80">
+                            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-title">Chocolate Hills</div>
+                        <div class="card-caption">Bohol Landmark</div>
+                        <div class="card-desc">Iconic dome-shaped rolling green and brown hills.</div>
+                        <audio controls class="audio-player">
+                            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3" type="audio/mpeg">
+                        </audio>
+                        <a href="https://en.wikipedia.org/wiki/Chocolate_Hills" target="_blank" rel="noopener noreferrer" class="card-btn">Visit Website <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                    </div>
+                </div>
+
+                <div class="article-card" id="mayon">
+                    <div class="card-media-container">
+                        <video controls poster="https://images.unsplash.com/photo-1608889825205-eebdb9fc5806?auto=format&fit=crop&w=600&q=80">
+                            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-title">Mayon Volcano</div>
+                        <div class="card-caption">Albay, Bicol</div>
+                        <div class="card-desc">Famous active volcano known for its perfectly symmetrical cone shape.</div>
+                        <audio controls class="audio-player">
+                            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3" type="audio/mpeg">
+                        </audio>
+                        <a href="https://en.wikipedia.org/wiki/Mayon" target="_blank" rel="noopener noreferrer" class="card-btn">Visit Website <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                    </div>
+                </div>
+
+                <div class="article-card" id="siargao">
+                    <div class="card-media-container">
+                        <video controls poster="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=600&q=80">
+                            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-title">Siargao</div>
+                        <div class="card-caption">Surfing Capital</div>
+                        <div class="card-desc">Tropical island paradise famous for surfing, lagoons, and palm groves.</div>
+                        <audio controls class="audio-player">
+                            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3" type="audio/mpeg">
+                        </audio>
+                        <a href="https://en.wikipedia.org/wiki/Siargao" target="_blank" rel="noopener noreferrer" class="card-btn">Visit Website <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="connector-line"></div>
+
+        <div class="node node-footer">
+            <strong style="color: var(--neon-teal);">Footer</strong><br>
+            <small>Credits &copy; Group 3 | IT101</small>
+        </div>
+
+    </div>
+
+</body>
+</html>
